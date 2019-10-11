@@ -14,15 +14,16 @@ class Graph:
             self.edgeList.append(Edge(e))
 
         # Initialize vertex neighbors dictionary
-        # Uses vertex label to return a list of Vertex objects
+        # Uses vertex label to return a list of tuples
+        # Tuple: neighboring vertex, weight of connecting edge
         self.neighborsDict = {}
         for v in self.vertexList:
             neighbors = []
             for e in self.edgeList:
                 if (e.getStart().getLabel() == v.getLabel()):
-                    neighbors.append(e.getEnd())
+                    neighbors.append((e.getEnd(), e.getWeight()))
                 if (e.getEnd().getLabel() == v.getLabel()):
-                    neighbors.append(e.getStart())
+                    neighbors.append((e.getStart(), e.getWeight()))
             self.neighborsDict[v.getLabel()] = neighbors
 
     def __str__(self):
@@ -54,6 +55,9 @@ class Edge(Graph):
 
     def __repr__(self):
         return self.__str__()
+    
+    def __eq__(self, e):
+        return (self.startVertex.getLabel() == e.getStart().getLabel()) & (self.endVertex.getLabel() == e.getEnd().getLabel())
 
     def getTuple(self):
         return (self.startVertex, self.endVertex)
@@ -76,6 +80,9 @@ class Vertex(Graph):
 
     def __repr__(self):
         return self.__str__()
+
+    def __eq__(self, v):
+        return self.vertexLabel == v.getLabel()
 
     def getLabel(self):
         return self.vertexLabel
