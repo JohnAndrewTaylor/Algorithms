@@ -1,4 +1,4 @@
-# General Search Algorithm
+# Generic Search Algorithm
 # John Andrew Taylor, 2019
 # General purpose classes defining graphs, edges, vertices.
 # The search will return a path from the start to the goal state
